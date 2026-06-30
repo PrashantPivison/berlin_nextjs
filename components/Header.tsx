@@ -14,6 +14,8 @@ const NAV_LINKS = [
 ];
 
 const LOGO_SRC = "/images/berlin-business-office-usa-logo.svg";
+// Mobile bar uses the stacked footer logo, matching the live site.
+const MOBILE_LOGO_SRC = "/images/berlin-business-office-usa-logo-footer.svg";
 
 /**
  * Header — replicates the live site:
@@ -80,18 +82,8 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile top bar */}
+      {/* Mobile top bar: hamburger (left) + stacked logo (right) */}
       <div className="panel-header">
-        <div className="mobile-logo">
-          <Link href="https://www.berlinoffice-usa.com/" rel="home">
-            <Image
-              src={LOGO_SRC}
-              width={270}
-              height={49}
-              alt="Berlin Business Office, USA"
-            />
-          </Link>
-        </div>
         <button
           type="button"
           className="btn-hamburger"
@@ -105,6 +97,16 @@ export default function Header() {
             <span className="line" />
           </div>
         </button>
+        <div className="mobile-logo">
+          <Link href="https://www.berlinoffice-usa.com/" rel="home">
+            <Image
+              src={MOBILE_LOGO_SRC}
+              width={150}
+              height={78}
+              alt="Berlin Business Office, USA"
+            />
+          </Link>
+        </div>
       </div>
 
       {/* Mobile slideout menu */}
@@ -113,19 +115,24 @@ export default function Header() {
         onClick={() => setOpen(false)}
         aria-hidden
       />
-      <nav className="slideout-menu" aria-label="Mobile">
-        <ul className="menu-nav">
-          {NAV_LINKS.map((item) => (
-            <li
-              key={item.href}
-              className={pathname === item.href ? "active" : undefined}
-            >
-              <Link href={item.href} onClick={() => setOpen(false)}>
-                {item.label}
-              </Link>
+      <nav id="menu" className="slideout-menu slideout-menu-left" aria-label="Mobile">
+        <section className="menu-section">
+          <ul className="menu-section-list">
+            <li className="menu-shape-li">
+              <MenuShapeIcon />
             </li>
-          ))}
-        </ul>
+            {NAV_LINKS.map((item) => (
+              <li
+                key={item.href}
+                className={pathname === item.href ? "active" : undefined}
+              >
+                <Link href={item.href} onClick={() => setOpen(false)}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       </nav>
     </>
   );

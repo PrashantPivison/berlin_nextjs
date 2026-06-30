@@ -82,6 +82,9 @@ export default function TestimonialSlider() {
       slidesPerView: 1,
       slidesPerGroup: 1,
       spaceBetween: 10,
+      observer: true,
+      observeParents: true,
+      resizeObserver: true,
       loop: true,
       breakpoints: {
         1024: { slidesPerView: 2, slidesPerGroup: 1 },

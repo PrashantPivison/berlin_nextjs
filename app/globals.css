@@ -391,35 +391,75 @@ h1 {
   transform: translateX(0);
 }
 
+/* Transparent click-catcher to close the menu (the live site pushes the
+   content rather than dimming it). */
 .slideout-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: transparent;
   z-index: 8999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
 }
 .slideout-open .slideout-overlay {
   opacity: 1;
   pointer-events: auto;
 }
 
-.slideout-menu .menu-nav {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0;
-  padding: 0 15px;
+/* Push the page content to the right when the menu opens (slideout effect). */
+main {
+  transition: transform 0.3s ease;
+}
+.slideout-open main {
+  transform: translateX(256px);
+}
+.slideout-open {
+  overflow: hidden;
 }
 
-.slideout-menu .menu-nav li a {
-  width: 100%;
+/* Sidebar nav list (theme .menu-section-list) */
+.menu-section-list {
+  list-style: none;
+  margin: 0;
+  padding: 25px 10px;
+}
+
+.menu-section-list li {
+  display: block;
+  margin: 0;
+}
+
+.menu-section-list .menu-shape-li {
+  padding-bottom: 15px;
+}
+
+.menu-section-list .menu-shape-icon {
+  width: 54px;
+  height: auto;
+  display: block;
+}
+
+.menu-section-list li a {
+  line-height: 2;
   color: var(--white);
   display: block;
-  padding: 10px 5px;
+  padding: 10px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  line-height: 2;
+  font-size: var(--sm);
+  font-weight: 600;
   text-shadow: none;
+  transition: var(--transition-normal);
+}
+
+.menu-section-list li a:hover {
+  color: var(--accent);
+}
+
+/* Active/current page: white block with dark text (standards.css mobile rule) */
+.menu-section-list li.active > a {
+  background-color: var(--white);
+  color: var(--black);
+  border-bottom: 1px solid var(--white);
 }
 
 @media (max-width: 991px) {
@@ -1127,6 +1167,24 @@ h1 {
   display: block;
 }
 
+/* Mobile: the live site insets content images by 10px (wp-custom-css).
+   The hero background stays full-bleed. */
+@media (max-width: 767px) {
+  .single-image-holder {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .hero-bg-wrapper .single-image-holder,
+  .feat-img .single-image-holder,
+  .key .single-image-holder {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .hero {
+    padding-left: 15px;
+  }
+}
+
 /* Hero image-credit badge (Key Industries) */
 .hero-bg-wrapper .img-source {
   position: absolute;
@@ -1183,6 +1241,11 @@ h1 {
 
 .not-bold-title h2 {
   font-weight: normal;
+}
+
+.wb-custom-title .single-image-holder {
+  flex-shrink: 0;
+  line-height: 0;
 }
 
 .wb-custom-title .pattern {
@@ -1259,6 +1322,20 @@ h1 {
   .key-col {
     width: 100%;
   }
+}
+
+/* Key Industries row rhythm — match the live WPBakery custom paddings, which
+   hold at ALL widths (no responsive override on the live site). Without this,
+   the generic .content-row mobile rule (padding: 20px 0) crams the dotted
+   intro right under the hero. Live: vc_custom_1753196340814 = 120/100 on the
+   first row; second row margin-top: -43px (vc_custom_1758309515933). */
+.ki-content .content-row:first-child {
+  padding-top: 120px;
+  padding-bottom: 100px;
+}
+.ki-content .content-row + .content-row {
+  padding-top: 0;
+  margin-top: -43px;
 }
 
 /* =========================================================================

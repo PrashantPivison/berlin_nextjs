@@ -42,18 +42,20 @@ export default function KeyIndustriesPage() {
           imgSource="Bikini Berlin"
         />
 
-        <div className="container actualcontent">
+        <div className="container actualcontent ki-content">
           <div className="wpb-content-wrapper">
             {keyIndustries.sections.map((section, i) => (
               <section className="content-row" key={i}>
                 <div className="wb-custom-title not-bold-title">
-                  <Image
-                    src={PATTERNS[i] ?? PATTERNS[0]}
-                    width={80}
-                    height={80}
-                    alt=""
-                    className="pattern"
-                  />
+                  <span className="single-image-holder">
+                    <Image
+                      src={PATTERNS[i] ?? PATTERNS[0]}
+                      width={80}
+                      height={80}
+                      alt=""
+                      className="pattern"
+                    />
+                  </span>
                   <h2>{section.heading}</h2>
                 </div>
                 <div className="keys-grid">

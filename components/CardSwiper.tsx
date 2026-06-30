@@ -36,6 +36,11 @@ export default function CardSwiper({ variant, slides, options, afterControls }: 
       slidesPerView: 1,
       spaceBetween: 0,
       autoHeight: true,
+      // Recalculate slide widths when the container/viewport changes so slides
+      // never end up wider than their (e.g. resized) container.
+      observer: true,
+      observeParents: true,
+      resizeObserver: true,
       loop: slides.length > 1,
       pagination: {
         el: holder.querySelector(".swiperPagination") as HTMLElement,
